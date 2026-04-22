@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroVision AI - Dashboard</title>
+    <link rel="stylesheet" href="/static/dashboard.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>🌾 AgroVision AI</h1>
+                <p>Monitoramento Operacional Inteligente</p>
+                <div class="status-indicator">
+                    <span id="camera-status" class="status-dot camera-offline"></span>
+                    <span>Câmera</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Grid -->
+        <main class="main-grid">
+            <!-- Seção 1: Câmera ao Vivo -->
+            <section class="card camera-section">
+                <h2>📹 Câmera ao Vivo</h2>
+                <div class="video-container">
+                    <img id="video-feed" src="/video_feed" alt="Stream de vídeo" />
+                    <div id="video-loading" class="loading">Conectando...</div>
+                </div>
+                <div class="camera-info">
+                    <p>Fonte: <span id="source-type">--</span></p>
+                    <p>Status: <span id="connection-status">Desconectado</span></p>
+                </div>
+            </section>
+
+            <!-- Seção 2: Chat com Agente -->
+            <section class="card agent-section">
+                <h2>🤖 {{ agent_name }}</h2>
+                <div class="agent-info">
+                    <p id="agent-role">Carregando...</p>
+                </div>
+                
+                <div id="chat-history" class="chat-history">
+                    <!-- Mensagens aparecem aqui -->
+                </div>
+
+                <form id="chat-form" class="chat-form" onsubmit="sendMessage(event)">
+                    <input 
+                        type="text" 
+                        id="chat-input" 
+                        placeholder="Faça uma pergunta sobre os eventos detectados..."
+                        autocomplete="off"
+                    />
+                    <button type="submit" id="send-btn">Enviar</button>
+                </form>
+
+                <div class="quick-prompts">
+                    <button class="quick-btn" onclick="quickQuestion('O que foi detectado nos últimos eventos?')">
+                        Últimos eventos
+                    </button>
+                    <button class="quick-btn" onclick="quickQuestion('Existe algum padrão no monitoramento?')">
+                        Padrões
+                    </button>
+                    <button class="quick-btn" onclick="quickQuestion('Qual é o risco operacional agora?')">
+                        Risco
+                    </button>
+                    <button class="quick-btn" onclick="quickQuestion('Qual deve ser a próxima ação?')">
+                        Próxima ação
+                    </button>
+                </div>
+            </section>
+
+            <!-- Seção 3: Eventos Recentes -->
+            <section class="card events-section">
+                <h2>📊 Eventos Recentes</h2>
+                <div id="events-list" class="events-list">
+                    <p class="loading">Carregando eventos...</p>
+                </div>
+            </section>
+
+            <!-- Seção 4: Status do Sistema -->
+            <section class="card status-section">
+                <h2>⚙️ Status do Sistema</h2>
+                <div class="status-grid">
+                    <div class="status-item">
+                        <span class="label">Câmera Online</span>
+                        <span id="status-camera-online" class="value">--</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="label">Câmera Conectada</span>
+                        <span id="status-camera-connected" class="value">--</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="label">YOLO Pronto</span>
+                        <span id="status-yolo" class="value">✓</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="label">Ollama Disponível</span>
+                        <span id="status-ollama" class="value">--</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="label">Total de Eventos</span>
+                        <span id="status-total-events" class="value">--</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="label">Agente Status</span>
+                        <span id="status-agent" class="value">Pronto</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>AgroVision AI v1.0 | Monitoramento Inteligente em Tempo Real</p>
+        </footer>
+    </div>
+
+    <script src="/static/dashboard.js"></script>
+</body>
+</html>
