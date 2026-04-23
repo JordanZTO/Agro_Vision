@@ -4,13 +4,15 @@ venv/
 env/
 *.egg-info/
 
-# Banco de Dados
-*.db
+# Banco de Dados (Ignorar apenas os de teste/temp)
+# *.db (removido: detections.db é necessário)
 *.sqlite
 *.sqlite3
+test_*.db
 
 # Configurações Locais (NÃO commitar chaves/secrets)
-.env
+# REMOVIDO: .env pois contém configurações essenciais para rodar o projeto
+# Use .env.example para documentar valores padrão se necessário
 .env.local
 .env.*.local
 
